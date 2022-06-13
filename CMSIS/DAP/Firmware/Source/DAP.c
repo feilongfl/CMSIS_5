@@ -893,11 +893,6 @@ static uint32_t DAP_SWD_Transfer(const uint8_t *request, uint8_t *response) {
     }
   }
 
-  if(request_count != 0u) {
-    // revert canceled requests
-    request--;
-  }
-
   for (; request_count != 0U; request_count--) {
     // Process canceled requests
     request_value = *request++;
