@@ -25,6 +25,8 @@
  *
  *---------------------------------------------------------------------------*/
 
+#include <stdio.h>
+
 #include "DAP_config.h"
 #include "DAP.h"
 
@@ -275,12 +277,14 @@ SWD_TransferFunction(Slow)
 //   data:    DATA[31:0]
 //   return:  ACK[2:0]
 uint8_t  SWD_Transfer(uint32_t request, uint32_t *data) {
+  uint8_t ret;
   if (DAP_Data.fast_clock) {
-    return SWD_TransferFast(request, data);
+    ret = SWD_TransferFast(request, data);
   } else {
-    return SWD_TransferSlow(request, data);
+    ret = SWD_TransferSlow(request, data);
   }
+  printf("SWD_Transfer ret: %d\n", ret);
+  return ret;
 }
-
 
 #endif  /* (DAP_SWD != 0) */
